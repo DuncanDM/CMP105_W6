@@ -4,7 +4,9 @@
 #include "Framework/Input.h"
 #include <string.h>
 #include <iostream>
-
+#include "Ball.h"
+#include "DirectBall.h"
+#include "LaunchBall.h"
 
 class Level{
 public:
@@ -25,4 +27,14 @@ private:
 	Input* input;
 
 	// More level variables
+	Ball ball;
+	sf::Texture ballTexture;
+
+	DirectBall dirBall;
+	sf::Texture dirBallTexture;
+
+	LaunchBall lBall;
+	sf::Texture lBallTexture;
+
+	sf::Vector2u winSize;
 };

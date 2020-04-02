@@ -6,7 +6,24 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	input = in;
 
 	// initialise game objects
+	ball.setInput(input);
+	dirBall.setInput(input);
+	lBall.setInput(input);
 
+	ballTexture.loadFromFile("gfx/Beach_Ball.png");
+	ball.setSize(sf::Vector2f(50, 50));
+	ball.setPosition(100, 100);
+	ball.setTexture(&ballTexture);
+
+	dirBallTexture.loadFromFile("gfx/Beach_Ball.png");
+	dirBall.setSize(sf::Vector2f(50, 50));
+	dirBall.setPosition(50, 50);
+	dirBall.setTexture(&ballTexture);
+
+	lBallTexture.loadFromFile("gfx/Beach_Ball.png");
+	lBall.setSize(sf::Vector2f(50, 50));
+	lBall.setPosition(50, 500);
+	lBall.setTexture(&ballTexture);
 }
 
 Level::~Level()
@@ -17,19 +34,28 @@ Level::~Level()
 // handle user input
 void Level::handleInput(float dt)
 {
-
+	ball.handleInput(dt, winSize.y - 50);
+	lBall.handleInput(dt);
 }
 
 // Update game objects
 void Level::update(float dt)
 {
+	winSize = window->getSize();
 
+	ball.update(dt, (winSize.y - 50));
+	dirBall.update(dt);
+	lBall.update(dt, (winSize.y - 50));
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
+
+	window->draw(ball);
+	window->draw(dirBall);
+	window->draw(lBall);
 
 	endDraw();
 }
